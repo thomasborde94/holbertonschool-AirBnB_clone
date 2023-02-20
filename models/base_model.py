@@ -12,16 +12,23 @@ class BaseModel:
         updated_at
     """
     
-    def __init__(self, id=None, created_at=None, updated_at=None):
+    def __init__(self, *args, **kwargs):
         """The constructor of the BaseModel Class"""
-        id = str(uuid.uuid4())
-        self.id = id
+        if len(kwargs) != 0:
+            for keys, values in kwargs.items():
+                if keys == "created_at" or keys == "updated_at":
+                    values = datetime.datetime.strptime(values, '%Y-%m-%dT%H:%M:%S.%f')
+                if keys != "__class__":
+                    setattr(self, keys, values)
+        else:
+            id = str(uuid.uuid4())
+            self.id = id
 
-        created_at = datetime.datetime.now()
-        self.created_at = created_at
+            created_at = datetime.datetime.now()
+            self.created_at = created_at
 
-        updated_at = datetime.datetime.now()
-        self.updated_at = updated_at
+            updated_at = datetime.datetime.now()
+            self.updated_at = updated_at
 
     def __str__(self):
         """Return string representation of the BaseModel class"""
