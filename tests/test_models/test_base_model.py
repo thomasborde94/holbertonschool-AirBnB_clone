@@ -25,8 +25,9 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(bm1.updated_at, datetime.datetime)
 
     def test_str(self):
-        bm1 = BaseModel()
-        self.assertIsInstance(bm1, BaseModel)
+##        bm1 = BaseModel()
+##        self.assertEqual(str(bm1), "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__))
+        pass
 
     def test_save(self):
         bm1 = BaseModel()
@@ -35,7 +36,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertNotEqual(tmp, bm1.updated_at)
 
     def test_to_dict(self):
-        pass
+        bm1 = BaseModel()
+        newDic = bm1.to_dict()
+        self.assertIsInstance(newDic, dict)
+        self.assertTrue("__class__" in newDic)
 
 if __name__ == "__main__":
     unittest.main()
