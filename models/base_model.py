@@ -4,6 +4,7 @@ import datetime
 import uuid
 import models
 
+
 class BaseModel:
     """Represent the base model.
     Attributes:
@@ -11,7 +12,7 @@ class BaseModel:
         created_at
         updated_at
     """
-    
+
     def __init__(self, *args, **kwargs):
         """The constructor of the BaseModel Class"""
         if len(kwargs) != 0:
@@ -45,12 +46,9 @@ class BaseModel:
     def to_dict(self):
         """returns a dictionary containing all keys/values
         of __dict__ of the instance"""
-        my_dict = self.__dict__
+        my_dict = self.__dict__.copy()
         for keys, values in my_dict.items():
             if type(my_dict[keys]) == datetime.datetime:
                 my_dict[keys] = values.isoformat()
         my_dict["__class__"] = self.__class__.__name__
         return(my_dict)
-
-        
-
