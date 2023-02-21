@@ -6,7 +6,6 @@ import cmd
 class HBNBCommand(cmd.Cmd):
     """class of the interpreter"""
     prompt = '(hbnb)'
-    file = None
 
     def do_quit(self, arg):
         """quits the console"""
