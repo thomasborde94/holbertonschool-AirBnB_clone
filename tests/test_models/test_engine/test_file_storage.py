@@ -44,12 +44,12 @@ class TestFileStorage(unittest.TestCase):
     def test_reload(self):
         """test of the reload method"""
         bm = BaseModel()
-        with open("file.json", "w", encoding="utf-8") as f:
-            key = "{}.{}".format(type(bm).__name__, bm.id)
-            json.dump({key: bm.to_dict()}, f)
+        models.storage.new(bm)
+        models.storage.save()
         models.storage.reload()
-        store = FileStorage._FileStorage__objects
-        self.assertIn("BaseModel." + bm.id, store)
+        obj = FileStorage._FileStorage__objects
+        self.assertIn("BaseModel." + bm.id, obj)
+
 
 if __name__ == "__main__":
     unittest.main()
