@@ -3,7 +3,6 @@
 from models.base_model import BaseModel
 
 
-
 class Amenity(BaseModel):
     """represents an Amenity, inherits from BaseModel"""
     name = ""
