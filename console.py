@@ -22,8 +22,9 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """quits the console"""
         exit()
+
     def do_EOF(self, arg):
-        """quits the console"""
+        """quits the console using ctrl+D"""
         print()
         exit()
 
@@ -32,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_create(self, arg):
-        """create a new instance"""
+        """create a new instance of a class un class_list"""
         if len(arg) == 0:
             print("** class name missing **")
         elif arg not in self.class_list:
@@ -43,6 +44,7 @@ class HBNBCommand(cmd.Cmd):
             print(newInstance.id)
 
     def do_show(self, arg):
+        """prints the string representation of an instance"""
         token = arg.split(" ")
         dict_obj = storage.all()
 
@@ -53,11 +55,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         elif len(token) < 2:
-                print("** instance id missing **")
+            print("** instance id missing **")
 
         else:
             instance_key = "{}.{}".format(token[0], token[1])
-            
+
             if instance_key not in dict_obj.keys():
                 print("** no instance found **")
 
@@ -65,6 +67,7 @@ class HBNBCommand(cmd.Cmd):
                 print(dict_obj[instance_key])
 
     def do_destroy(self, arg):
+        """Deletes an instances of a class"""
         token = arg.split(" ")
         dict_obj = storage.all()
 
@@ -75,7 +78,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         elif len(token) < 2:
-                print("** instance id missing **")
+            print("** instance id missing **")
 
         else:
             instance_key = "{}.{}".format(token[0], token[1])
@@ -88,6 +91,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
+        """prints string representation of all instances in __objects"""
         dict_obj = storage.all()
         list_obj = []
 
@@ -105,6 +109,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_update(self, arg):
+        """Updates an instance of a class by adding or updating attribute"""
         token = arg.split(" ")
         dict_obj = storage.all()
 
@@ -115,11 +120,11 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         elif len(token) < 2:
-                print("** instance id missing **")
+            print("** instance id missing **")
 
         else:
             instance_key = "{}.{}".format(token[0], token[1])
-            
+
             if instance_key not in dict_obj.keys():
                 print("** no instance found **")
 
@@ -132,6 +137,7 @@ class HBNBCommand(cmd.Cmd):
             else:
                 setattr(dict_obj[instance_key], token[2], token[3])
                 storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
