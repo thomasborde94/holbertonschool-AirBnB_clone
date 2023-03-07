@@ -1,6 +1,6 @@
 .flex {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: lswrap;
     justify-content: center;
 }
 .places h1 {
